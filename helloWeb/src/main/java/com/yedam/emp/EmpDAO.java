@@ -60,7 +60,7 @@ public class EmpDAO {
 	// List<Map<String, Object>> 비교
 	public List<EmpVO> empVoList(){
 		connect();
-		sql = "select * from emp_temp";
+		sql = "select * from emp_temp order by employee_id";
 		List<EmpVO> list = new ArrayList<>();
 		try {
 			stmt = conn.createStatement();
@@ -136,6 +136,27 @@ public class EmpDAO {
 			psmt = conn.prepareStatement(sql); // 기능은 똑같은데 파라미터(?) 처리할 때 좋음
 			psmt.setInt(1, sal);
 			psmt.setInt(2, id);
+			
+			r = psmt.executeUpdate(); // 처리된 건수 (성공하면 1)
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
+	// 수정2
+	public int updateEmp(EmpVO emp) {
+		connect();
+		sql = "update emp_temp set hire_date = ?, email=?, job_id=?, last_name=?  where employee_id = ?";
+		int r = 0;
+		try {
+			psmt = conn.prepareStatement(sql); // 기능은 똑같은데 파라미터(?) 처리할 때 좋음
+			psmt.setString(1, emp.getHireDate());
+			psmt.setString(2, emp.getEmail());
+			psmt.setString(3, emp.getJobId());
+			psmt.setString(4, emp.getLastName());
+			psmt.setInt(5, emp.getEmployeeId());
 			
 			r = psmt.executeUpdate(); // 처리된 건수 (성공하면 1)
 			
