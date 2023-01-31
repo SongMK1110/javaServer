@@ -73,16 +73,24 @@ function makeTr(item) {
 }
 
 function checkedFunc() {
-  if (document.querySelector('thead input[type="checkbox"]').checked == true) {
-    document.querySelector('thead input[type="checkbox"]').checked = false;
-    // } else if (
-    //   document.querySelectorAll('tbody input[type="checkbox"]').forEach((chk) => {
-    //     chk.checked = true;
-    //   })
-    // ) {
-    //   document.querySelector('thead input[type="checkbox"]').checked = true;
-    //
+  let chks = document.querySelectorAll('tbody input[type="checkbox"]');
+  let chksChecked = 0;
+
+  for (let i = 0; i < chks.length; i++) {
+    let cbox = chks[i];
+    if (cbox.checked) {
+      chksChecked++;
+    }
   }
+
+  if (chks.length == chksChecked) {
+    document.querySelector("#cboxAll").checked = true;
+  } else {
+    document.querySelector("#cboxAll").checked = false;
+  }
+  // if (document.querySelector('thead input[type="checkbox"]').checked == true) {
+  //   document.querySelector('thead input[type="checkbox"]').checked = false;
+  // }
 }
 
 // 삭제버튼 이벤트 콜백함수
@@ -107,8 +115,8 @@ function deleteRowFunc() {
 function modifyTrFunc() {
   // this => 수정
   let thisTr = this.parentElement.parentElement;
-  console.log("사원번호: ", thisTr.children[0].innerText);
-  console.log("이름: ", thisTr.children[1].innerText);
+  // console.log("사원번호: ", thisTr.children[0].innerText);
+  // console.log("이름: ", thisTr.children[1].innerText);
   let id = thisTr.children[0].innerText;
   let name = thisTr.children[1].innerText;
   let mail = thisTr.children[2].innerText;
@@ -185,7 +193,7 @@ function updateMemberFun() {
   })
     .then((resolve) => resolve.text())
     .then((result) => {
-      console.log(result);
+      // console.log(result);
       if (result.indexOf("Success") != -1) {
         let newTr = makeTr({
           id: id,
@@ -201,6 +209,10 @@ function updateMemberFun() {
       }
     })
     .catch((reject) => console.log(reject));
+
+  document.querySelectorAll("button").forEach((chk) => {
+    chk.disabled = false;
+  });
 }
 
 // 저장 처리 함수
