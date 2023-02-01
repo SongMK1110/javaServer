@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>util/findEl.html</title>
+    <style>
+      div.outer {
+        background-color: yellow;
+        width: 505px;
+        height: 300px;
+      }
+      div.inner {
+        display: inline-block;
+        background-color: aqua;
+        height: 30px;
+        width: 120px;
+        margin: 2px;
+        border: 1px solid black;
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="list" class="outer"></div>
+    <input type="text" id="search" />
+    <button id="btn">제거하기</button>
+    <div id="timer"></div>
+    <script>
+      let words = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos suscipit error a cupiditate fuga recusandae nihil, eveniet maxime sunt soluta esse sit deleniti quidem vitae quia doloremque, repudiandae odio magnam.`;
+      let items = words.split(" ");
+      items.forEach((word) => {
+        let div = document.createElement("div");
+        div.setAttribute("class", "inner");
+        div.innerText = word;
+        list.append(div);
+      });
+      search.addEventListener("change", function () {
+        let text = search.value;
+        let targetDiv = document.querySelectorAll(".inner");
+        console.log(targetDiv);
+        targetDiv.forEach((div) => {
+          if (text == div.innerHTML) {
+            div.remove();
+          }
+
+          if (!document.querySelectorAll(".inner").length) {
+            alert("OK");
+            clearInterval(itv);
+            location.reload();
+          }
+        });
+        search.value = "";
+        // search.forcus();
+      });
+
+      let cnt = 5;
+      let itv = setInterval(() => {
+        if (cnt == 0) {
+          alert("실패");
+          clearInterval(itv);
+          cnt = 5;
+          timer.innerText = cnt;
+          return;
+        }
+        timer.innerText = --cnt;
+      }, 1000);
+    </script>
+  </body>
+</html>

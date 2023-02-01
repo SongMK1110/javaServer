@@ -3,6 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <title>info/empList.html</title>
+    <style>
+      tr.delError {
+        background-color: gray;
+      }
+      a {
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+    </style>
   </head>
   <body>
     <h3>사원등록</h3>
@@ -54,7 +63,7 @@
       </thead>
       <tbody id="list"></tbody>
     </table>
-
+    <div id="paging"></div>
     <script src="../js/empList.js"></script>
   </body>
 </html>

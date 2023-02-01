@@ -3,20 +3,16 @@
  */
 
 // 목록출력하기
-let totalAry = []; // 전체목록 담아놓을 용도
-fetch("../empListJson")
+fetch("../BoardJson")
   .then((resolve) => resolve.json())
   .then((result) => {
     // console.log(result);
-    localStorage.setItem("total", result.length);
-    totalAry = result;
-    // // 배열관련메소드 : forEach, map, filter, reduce 메소드
-    // result.forEach(function (item, idx, arry) {
-    //   let tr = makeTr(item); // tr 생성 후 반환
-    //   list.append(tr);
-    // }); // result배열에 등록된 값의 갯수만큼 function() 실행
-    showPages(12);
-    employeeList(12);
+    // 배열관련메소드 : forEach, map, filter, reduce 메소드
+    result.forEach(function (item, idx, arry) {
+      let tr = makeTr(item); // tr 생성 후 반환
+      // console.log(tr);
+      list.append(tr);
+    }); // result배열에 등록된 값의 갯수만큼 function() 실행
   })
   .catch((reject) => {
     console.log(reject);
@@ -24,7 +20,7 @@ fetch("../empListJson")
 
 // 저장버튼에 submit 이벤트 등록
 document
-  .querySelector('form[name="empForm"]')
+  .querySelector('form[name="boardForm"]')
   .addEventListener("submit", addMemberFnc);
 
 // 전체선택 체크박스
@@ -40,7 +36,7 @@ document
 // 데이터 한건 활용해서 tr 요소를 생성
 function makeTr(item) {
   // DOM 요소생성
-  let titles = ["id", "lastName", "email", "hireDate", "job"];
+  let titles = ["no", "title", "username", "wday"];
   // 데이터 건수만큼 반복
   let tr = document.createElement("tr");
   // columns 갯수만큼 반복
@@ -78,20 +74,6 @@ function makeTr(item) {
 }
 
 function checkedFunc() {
-  // let chks = document.querySelectorAll('tbody input[type="checkbox"]');
-  // let chksChecked = 0;
-  // for (let i = 0; i < chks.length; i++) {
-  //   let cbox = chks[i];
-  //   if (cbox.checked) {
-  //     chksChecked++;
-  //   }
-  // }
-  // if (chks.length == chksChecked) {
-  //   document.querySelector("#cboxAll").checked = true;
-  // } else {
-  //   document.querySelector("#cboxAll").checked = false;
-  // }
-
   let allTr = document.querySelectorAll("tbody#list tr");
   let chkTr = document.querySelectorAll('tbody input[type="checkbox"]:checked');
   if (allTr.length == chkTr.length) {
@@ -227,13 +209,11 @@ function updateMemberFun() {
 function addMemberFnc(evnt) {
   evnt.preventDefault(); // submit 하면 페이지 이동되는데 페이지 이동 안할려고
   console.log("여기에 출력");
-  let id = document.querySelector('input[name="emp_id"]').value;
-  let name = document.querySelector('input[name="last_name"]').value;
-  let mail = document.querySelector('input[name="email"]').value;
-  let hDate = document.querySelector('input[name="hire_date"]').value;
-  let job = document.querySelector('input[name="job_id"]').value;
+  let name = document.querySelector('input[name="username"]').value;
+  let title = document.querySelector('input[name="title"]').value;
+  let text = document.querySelector('input[name="text"]').value;
 
-  if (!id || !name || !mail || !hDate || !job) {
+  if (!name || !title || !text) {
     alert("필수입력값을 확인!!");
     return;
   }
@@ -241,17 +221,7 @@ function addMemberFnc(evnt) {
   fetch("../empListJson", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" }, // key=val&key1 = val1
-    body:
-      "param=&id=" +
-      id +
-      "&name=" +
-      name +
-      "&mail=" +
-      mail +
-      "&hire=" +
-      hDate +
-      "&job=" +
-      job, // 'id=' -> 자바에서 파라미터, id는 js에서 만든 let id(input value 값)
+    body: "param=&name=" + name + "&title=" + title + "&text=" + text, // 'id=' -> 자바에서 파라미터, id는 js에서 만든 let id(input value 값)
   })
     .then((resolve) => resolve.json())
     .then((result) => {
@@ -266,11 +236,9 @@ function addMemberFnc(evnt) {
             job: job,
           })
         );
-        document.querySelector('input[name="emp_id"]').value = "";
-        document.querySelector('input[name="last_name"]').value = "";
-        document.querySelector('input[name="email"]').value = "";
-        document.querySelector('input[name="hire_date"]').value = "";
-        document.querySelector('input[name="job_id"]').value = "";
+        document.querySelector('input[name="username"]').value = "";
+        document.querySelector('input[name="title"]').value = "";
+        document.querySelector('input[name="text"]').value = "";
       } else if (result.retCode == "Fail") {
         alert("처리중 에러!");
       }
@@ -320,35 +288,5 @@ function processAfterFetch(ary = []) {
         }
       }
     }
-  });
-}
-
-// 페이지 목록()
-function showPages(curPage = 5) {
-  let endPage = Math.ceil(curPage / 10) * 10;
-  let startPage = endPage - 9;
-  let realEnd = Math.ceil(255 / 10);
-  endPage = endPage > realEnd ? realEnd : endPage;
-  let paging = document.getElementById("paging");
-
-  for (let i = startPage; i <= endPage; i++) {
-    let aTag = document.createElement("a");
-    aTag.href = "index.html";
-    aTag.innerText = i;
-    paging.append(aTag);
-  }
-}
-
-// 사원 목록()
-function employeeList(curPage = 5) {
-  let end = curPage * 10;
-  let start = end - 9;
-  let newList = totalAry.filter((emp, idx) => {
-    return idx + 1 >= start && idx < end;
-  });
-  let lst = document.getElementById("list");
-  newList.forEach((emp) => {
-    let tr = makeTr(emp);
-    lst.append(tr);
   });
 }
