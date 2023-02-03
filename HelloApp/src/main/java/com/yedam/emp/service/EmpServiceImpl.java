@@ -13,4 +13,19 @@ public class EmpServiceImpl implements EmpService{
 	public List<EmpVO> empList() {
 		return dao.empList();
 	}
+
+	@Override
+	public int addEmp(EmpVO emp) {
+		return dao.insertEmp(emp);
+	}
+
+	@Override
+	public EmpVO getEmp(int empId) {
+		return dao.searchEmp(empId);
+	}
+
+	@Override
+	public int modEmp(EmpVO emp) {
+		return dao.updateEmp(emp);
+	}
 }
