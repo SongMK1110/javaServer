@@ -22,16 +22,18 @@ public class EmpDAO extends DAO {
 	// 수정
 	public int updateEmp(EmpVO emp) {
 		connect();
-		sql = "update emp_temp set first_name=?, last_name=?, email=?, job_id=? where employee_id=?";
+		sql = "update emp_temp set first_name=?, last_name=?, email=?, job_id=?, hire_date=? where employee_id=?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, emp.getEmployeeId());
+			psmt.setString(1, emp.getFirstName());
 			psmt.setString(2, emp.getLastName());
 			psmt.setString(3, emp.getEmail());
-			psmt.setString(4, emp.getHireDate());
-			psmt.setString(5, emp.getJobId());
+			psmt.setString(4, emp.getJobId());
+			psmt.setString(5, emp.getHireDate());
+			psmt.setInt(6, emp.getEmployeeId());
 
 			int r = psmt.executeUpdate();
+			System.out.println(r);
 			return r;
 		} catch (SQLException e) {
 			e.printStackTrace();
