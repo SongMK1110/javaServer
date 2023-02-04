@@ -35,7 +35,7 @@ EmpVO emp = (EmpVO) request.getAttribute("modifyVO");
 		<tr>
 			<th>Hire_Date</th>
 			<td><input value="<%=emp.getHireDate().substring(0, 10)%>"
-				name="hire_date"></td>
+				name="hire_date" readonly></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">

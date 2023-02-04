@@ -33,7 +33,6 @@ public class EmpDAO extends DAO {
 			psmt.setInt(6, emp.getEmployeeId());
 
 			int r = psmt.executeUpdate();
-			System.out.println(r);
 			return r;
 		} catch (SQLException e) {
 			e.printStackTrace();
