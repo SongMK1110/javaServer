@@ -1,9 +1,12 @@
+<%@page import="java.util.Map.Entry"%>
+<%@page import="java.util.*"%>
 <%@page import="com.yedam.emp.vo.EmpVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="../includes/header.jsp"></jsp:include>
 <%
-EmpVO emp = (EmpVO) request.getAttribute("modifyVO");
+EmpVO emp = (EmpVO) request.getAttribute("svo");
+Map<String, String> list = (Map<String, String>) request.getAttribute("jobList");
 %>
 <h3>현제 페이지는 empModForm.do의 결과 modify.jsp 입니다.</h3>
 <form action="empModify.do" method="post">
@@ -26,10 +29,21 @@ EmpVO emp = (EmpVO) request.getAttribute("modifyVO");
 		</tr>
 		<tr>
 			<th>Job_ID</th>
-			<td><input value="<%=emp.getJobId()%>" name="job"> <select>
-					<option value="IT_PROG">개발자</option>
-					<option value="SA_REP">영업사원</option>
-					<option value="SA_MAN">영업팀장</option>
+			<td><select name="job">
+					<%
+					for (Entry<String, String> ent : list.entrySet()) {
+						if (ent.getKey().equals(emp.getJobId())) {
+					%>
+					<option selected value="<%=ent.getKey()%>"><%=ent.getValue()%>
+						<%
+						}
+						%>
+					
+					<option value="<%=ent.getKey()%>"><%=ent.getValue()%>
+						<%
+						}
+						%>
+					
 			</select></td>
 		</tr>
 		<tr>
@@ -39,7 +53,7 @@ EmpVO emp = (EmpVO) request.getAttribute("modifyVO");
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<button class="btn btn-primary" type="submit">수정완료</button>
+				<button class="btn btn-primary" type="submit">변경</button>
 			</td>
 		</tr>
 	</table>

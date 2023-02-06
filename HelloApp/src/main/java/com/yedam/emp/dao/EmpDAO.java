@@ -2,7 +2,9 @@ package com.yedam.emp.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.yedam.common.DAO;
 import com.yedam.emp.vo.EmpVO;
@@ -17,6 +19,43 @@ public class EmpDAO extends DAO {
 
 	public static EmpDAO getInstance() {
 		return instance;
+	}
+	
+	//삭제
+	public int deleteEmp(int id) {
+		connect();
+		sql = "delete from emp_temp where employee_id = ?";
+		int r = 0;
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, id);
+			
+			r = psmt.executeUpdate(); 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return r;
+	}
+	
+	// 직무 리스트
+	public Map<String, String> jobList(){
+		Map<String, String> jobs = new HashMap<>();
+		connect();
+		sql = "select job_id, job_title from jobs order by job_id";
+		try {
+			// psmt : 쿼리실행 & 실행결과를 반환
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			while (rs.next()) {
+				jobs.put(rs.getString("job_id"), rs.getString("job_title"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disconn();
+		}
+		return jobs;
 	}
 	
 	// 수정

@@ -16,8 +16,9 @@ public class EmpModControl implements Command {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) {
-		// service:int modEmp(EmpVO) -> serviceImpl: modEmp(EmpVO) -> dao:
-		// updateEmp(EmpVO)
+//		// service:int modEmp(EmpVO) -> serviceImpl: modEmp(EmpVO) -> dao:
+//		// updateEmp(EmpVO)
+		// eid=112&first_name=%EC%9B%94%EC%9A%94%EC%9D%BC&Last_name=%EC%9B%94%EC%9A%94%EC%9D%BC&email=test2%40mail.com&job=AD_VP&hire_date=2023-02-06
 		RequestDispatcher rd = null;
 
 		String eid = req.getParameter("eid");
@@ -42,12 +43,8 @@ public class EmpModControl implements Command {
 		try {
 			if (r > 0) {
 				resp.sendRedirect("empList.do");
-//				rd = req.getRequestDispatcher("WEB-INF/result/addResult.jsp");
-//				rd.forward(req, resp);
 			} else {
-				// resp.sendRedirect("WEB-INF/result/errorResult.jsp");
-				rd = req.getRequestDispatcher("WEB-INF/result/errorResult.jsp");
-				rd.forward(req, resp);
+				resp.sendRedirect("errorPage.do");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

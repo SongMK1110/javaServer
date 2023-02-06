@@ -16,6 +16,7 @@ import com.yedam.emp.command.EmpForm;
 import com.yedam.emp.command.EmpList;
 import com.yedam.emp.command.EmpModControl;
 import com.yedam.emp.command.EmpModFormControl;
+import com.yedam.emp.command.EmpRemoveControl;
 import com.yedam.emp.command.LoginControl;
 import com.yedam.emp.command.ServiceControl;
 
@@ -36,6 +37,7 @@ public class FrontController extends HttpServlet{
 		
 		map.put("/service.do", new ServiceControl());
 		map.put("/login.do", new LoginControl());
+		map.put("/errorPage.do", new ErrorPage());
 		// get : 목록출력(json)요청, post : 입력처리
 		map.put("/employee.do", new EmpControl());
 		// ???Form.do : 페이지 오픈
@@ -44,6 +46,7 @@ public class FrontController extends HttpServlet{
 		map.put("/empDetail.do", new EmpDetailControl()); // 상세페이지
 		map.put("/empModForm.do", new EmpModFormControl()); // 수정화면페이지
 		map.put("/empModify.do", new EmpModControl()); // 수정처리페이지
+		map.put("/empRemove.do", new EmpRemoveControl()); //삭제처리페이지
 	}
 	
 	@Override

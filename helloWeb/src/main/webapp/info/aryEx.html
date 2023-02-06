@@ -23,30 +23,30 @@
         th.innerText = title;
         head.append(th);
       });
-      let result = fruits.reduce((acc, item, idx) => {
-        let tr = document.createElement("tr");
-        for (let prop in item) {
-          let td = document.createElement("td");
-          td.innerText = item[prop];
-          tr.append(td);
-        }
-        acc.append(tr);
-        return acc;
-      }, document.getElementById("list"));
-      console.log(result);
-      // fruits.forEach((fruit, idx, ary) => {
-      //   if (fruit.like > 4) {
-      //     let tr = document.createElement("tr");
-      //     for (let prop in fruit) {
-      //       // for .. in 객체 속성 반복
-      //       let td = document.createElement("td");
-      //       td.innerText = fruit[prop];
-      //       tr.append(td);
-      //     }
-
-      //     list.append(tr);
+      // let result = fruits.reduce((acc, item, idx) => {
+      //   let tr = document.createElement("tr");
+      //   for (let prop in item) {
+      //     let td = document.createElement("td");
+      //     td.innerText = item[prop];
+      //     tr.append(td);
       //   }
-      // });
+      //   acc.append(tr);
+      //   return acc;
+      // }, document.getElementById("list"));
+      console.log(result);
+      fruits.forEach((fruit, idx, ary) => {
+        if (fruit.like > 4) {
+          let tr = document.createElement("tr");
+          for (let prop in fruit) {
+            // for .. in 객체 속성 반복
+            let td = document.createElement("td");
+            td.innerText = fruit[prop];
+            tr.append(td);
+          }
+
+          list.append(tr);
+        }
+      });
       // //선호도 4이상 요소를 over4에 저장
       // // forEach는 리턴값이 없어서 push해줘야함
       // // filter는 바로 넣을 수 있음

@@ -1,7 +1,6 @@
 package com.yedam.emp.command;
 
 import java.io.IOException;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,27 +11,23 @@ import com.yedam.emp.service.EmpService;
 import com.yedam.emp.service.EmpServiceImpl;
 import com.yedam.emp.vo.EmpVO;
 
-public class EmpModFormControl implements Command {
+public class EmpRemoveControl implements Command {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
-		// 수정화면: WEB-INF/views/modify.jsp 호출
-		
-		
+
 		String id = req.getParameter("id");
 
 		EmpService service = new EmpServiceImpl();
-		EmpVO emp = service.getEmp(Integer.parseInt(id));
-
-		req.setAttribute("svo", emp);
-
-		Map<String, String> jobList = service.jobList();
-		req.setAttribute("jobList", jobList);
+		int r = service.removeEmp(Integer.parseInt(id));
 		
 		try {
-			req.getRequestDispatcher("WEB-INF/views/modify.jsp").forward(req, resp);
-		} catch (ServletException | IOException e) {
+			if (r > 0) {
+				resp.sendRedirect("empList.do");
+			} else {
+				resp.sendRedirect("errorPage.do");
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

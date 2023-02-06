@@ -1,7 +1,12 @@
+<%@page import="java.util.Map.Entry"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="../includes/header.jsp"></jsp:include>
-
+<h3>현재 페이지는 empForm.do의 결과 emp.jsp 입니다.</h3>
+<%
+Map<String, String> list = (Map<String, String>) request.getAttribute("jobList");
+%>
 <form name="myFrm" action="employee.do" method="post">
 	<div class="form-group">
 		<label>사원번호:</label> <input class="form-control" type="number"
@@ -21,9 +26,13 @@
 	</div>
 	<div class="form-group">
 		<label>직무:</label> <select name="job">
-			<option value="IT_PROG">개발자</option>
-			<option value="SA_REP" selected>영업사원</option>
-			<option value="SA_MAN">영업팀장</option>
+			<%
+			for (Entry<String, String> ent : list.entrySet()){
+			%>
+				<option value="<%=ent.getKey() %>"><%=ent.getValue() %>
+			<%
+			}
+			%>
 		</select>
 	</div>
 	<br>
