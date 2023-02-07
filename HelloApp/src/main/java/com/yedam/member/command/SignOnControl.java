@@ -49,7 +49,7 @@ public class SignOnControl implements Command {
 			
 			MemberService service = new MemberServiceMybatis();
 			if(service.addMember(member) > 0) {
-				resp.sendRedirect("empList.do");
+				resp.sendRedirect("login.do");
 			} else {				
 				resp.sendRedirect("errorPage.do");
 			}

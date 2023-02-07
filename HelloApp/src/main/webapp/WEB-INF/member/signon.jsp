@@ -115,7 +115,7 @@ hr {
 <h3>현재 페이지는 signOnForm.do의 결과 signon.jsp 입니다.</h3>
 
 <div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <span onclick="location.href='login.do'" class="close" title="Close Modal">&times;</span>
   <form class="modal-content" action="signon.do" enctype="multipart/form-data" method="post">
     <div class="container">
       <h1>회원 가입</h1>
@@ -137,7 +137,7 @@ hr {
       <input type="file" multiple="multiple" placeholder="Enter image" name="image">
 
       <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+        <button type="button" onclick="location.href='login.do'" class="cancelbtn">Cancel</button>
         <button type="submit" class="signupbtn">Sign Up</button>
       </div>
     </div>
