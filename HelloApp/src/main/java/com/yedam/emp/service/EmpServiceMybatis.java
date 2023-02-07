@@ -11,11 +11,11 @@ import com.yedam.emp.vo.EmpVO;
 
 // EmpServiceImpl : jdbc
 // EmpServiceMybatis : mybatis
-public class EmpServiceMybatis implements EmpService{
+public class EmpServiceMybatis implements EmpService {
 
 	SqlSessionFactory sessionFactory = DataSource.getInstance();
-	SqlSession session = sessionFactory.openSession();
-	
+	SqlSession session = sessionFactory.openSession(); // openSession(true) 자동커밋
+
 	@Override
 	public List<EmpVO> empList() {
 		return session.selectList("com.yedam.emp.mapper.EmpMapper.empList");
@@ -23,8 +23,13 @@ public class EmpServiceMybatis implements EmpService{
 
 	@Override
 	public int addEmp(EmpVO emp) {
-		// TODO Auto-generated method stub
-		return 0;
+		int r = session.insert("com.yedam.emp.mapper.EmpMapper.addEmp", emp);
+		if (r > 0) {
+			session.commit();
+		} else {
+			session.rollback();
+		}
+		return r;
 	}
 
 	@Override
@@ -34,20 +39,30 @@ public class EmpServiceMybatis implements EmpService{
 
 	@Override
 	public int modEmp(EmpVO emp) {
-		// TODO Auto-generated method stub
-		return 0;
+		int r = session.update("com.yedam.emp.mapper.EmpMapper.modEmp", emp);
+		if (r > 0) {
+			session.commit();
+		} else {
+			session.rollback();
+		}
+		return r;
 	}
 
 	@Override
 	public Map<String, String> jobList() {
-		// TODO Auto-generated method stub
 		return null;
+//		return session.selectMap("com.yedam.emp.mapper.EmpMapper.getEmp.jobList");
 	}
 
 	@Override
 	public int removeEmp(int id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int r = session.delete("com.yedam.emp.mapper.EmpMapper.removeEmp", id);
+		if (r > 0) {
+			session.commit();
+		} else {
+			session.rollback();
+		}
+		return r;
 	}
 
 }

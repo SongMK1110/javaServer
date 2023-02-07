@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.yedam.common.Command;
 import com.yedam.emp.service.EmpService;
 import com.yedam.emp.service.EmpServiceImpl;
+import com.yedam.emp.service.EmpServiceMybatis;
 import com.yedam.emp.vo.EmpVO;
 
 public class EmpControl implements Command {
@@ -49,8 +50,9 @@ public class EmpControl implements Command {
 			emp.setJobId(job);
 			emp.setHireDate(hire);
 			emp.setEmail(mail);
-
-			EmpService service = new EmpServiceImpl();
+			
+			// 서비스 로직
+			EmpService service = new EmpServiceMybatis();//new EmpServiceImpl();
 			int r = service.addEmp(emp);
 
 			// 요청재지정

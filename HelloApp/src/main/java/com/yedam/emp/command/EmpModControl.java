@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.yedam.common.Command;
 import com.yedam.emp.service.EmpService;
 import com.yedam.emp.service.EmpServiceImpl;
+import com.yedam.emp.service.EmpServiceMybatis;
 import com.yedam.emp.vo.EmpVO;
 
 public class EmpModControl implements Command {
@@ -36,7 +37,7 @@ public class EmpModControl implements Command {
 		emp.setHireDate(hire);
 		emp.setEmail(mail);
 
-		EmpService service = new EmpServiceImpl();
+		EmpService service = new EmpServiceMybatis();//new EmpServiceImpl();
 		int r = service.modEmp(emp);
 
 		// 요청재지정

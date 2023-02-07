@@ -5,7 +5,8 @@
 <%
 	EmpVO emp = (EmpVO) request.getAttribute("searchVO");
 	Integer age = (Integer) request.getAttribute("myAge");
-	String id = (String) request.getAttribute("loginId");
+// 	String id = (String) request.getAttribute("loginId");
+	String id = (String) session.getAttribute("id");
 %>
 <%=age %> , <%=id %>
 <h3>현재 페이지는 empDetail.do의 결과 empDetail.jsp 입니다.</h3>
@@ -34,6 +35,7 @@
 		<th>Hire_Date</th>
 		<td><%=emp.getHireDate() %></td>
 	</tr>
+	<% if(id != null){ %>
 	<tr>
 		<td colspan="2" align="center">
 			<button class="btn btn-primary"
@@ -41,7 +43,8 @@
 			<button class="btn btn-warning"
 			 onclick="location.href='empRemove.do?id=<%=emp.getEmployeeId()%>'">삭제</button> <!-- empRemove.do?id=?? removeEmp(int id)-->
 		</td>
-	</tr>
+	</tr>  
+    <% } %>
 </table>
 
 <jsp:include page="../includes/footer.jsp"></jsp:include>
