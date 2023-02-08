@@ -122,7 +122,7 @@ hr {
       <p>Please fill in this form to create an account.</p>
       <hr>
       <label for="member_id"><b>Member ID</b></label>
-      <input type="text" placeholder="Enter Email" name="member_id" required>
+      <input type="text" placeholder="Enter id" name="member_id" required>
 
       <label for="member_pw"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="member_pw" required>
