@@ -30,7 +30,7 @@
 			<td><img width="150px" src="upload/${vo.image }"></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input class="btn btn-success type="submit" value="수정"></td>
+			<td colspan="2" align="center"><input type="submit" value="수정"></td>
 		</tr>
 
 	</table>
