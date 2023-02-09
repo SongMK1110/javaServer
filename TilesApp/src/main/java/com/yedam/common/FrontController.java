@@ -45,8 +45,8 @@ public class FrontController extends HttpServlet{
 		map.put("/loginForm.do", new LoginForm());//로그인화면
 		map.put("/login.do", new Login());
 		map.put("/logout.do", new LogoutControl()); //로그아웃처리
-		map.put("/myPageForm.do", new MyPageControl());
-		map.put("/modifyMember.do", new ModifyMember());
+		map.put("/myPageForm.do", new MyPageControl());//마이페이지
+		map.put("/modifyMember.do", new ModifyMember());//회원수정
 	}
 	
 	@Override

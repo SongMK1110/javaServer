@@ -6,8 +6,7 @@
 	<table class="table">
 		<tr>
 			<th>아이디</th>
-			<td><input type="text" name="mid" value="${vo.memberId }"
-				readonly></td>
+			<td><input type="text" name="mid" value="${vo.memberId }"></td>
 		</tr>
 		<tr>
 			<th>이름</th>
@@ -30,7 +29,8 @@
 			<td><img width="150px" src="upload/${vo.image }"></td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input type="submit" value="수정"></td>
+			<td colspan="2" align="center"><button type="submit"
+					class="btn btn-success">수정</button></td>
 		</tr>
 
 	</table>

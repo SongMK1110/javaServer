@@ -39,7 +39,7 @@ prefix="fmt"%>
   <span><b>제목:</b></span
   ><span><input type="text" id="title" /></span> <span><b>내용:</b></span
   ><span><input type="text" id="subject" /></span> <span><b>작성자:</b></span
-  ><span><input type="text" id="writer" value="${id }"/></span>
+  ><span><input type="text" id="writer" value="${id }" readonly/></span>
   <button class="btn btn-primary" id="addReply">댓글등록</button>
 </div>
 <br />
@@ -54,6 +54,7 @@ prefix="fmt"%>
 <script>
    let nid = ${vo.noticeId};
   let logid = '${id}';
+
    fetch("replyList.do?nid=" + nid)
      .then((resolve) => resolve.json())
      .then((result) => {
