@@ -13,7 +13,7 @@
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td><input type="text" name="writer"></td>
+			<td><input type="text" name="writer" value="${name }") readonly></td>
 		</tr>
 		<tr>
 			<th>첨부파일</th>
@@ -22,7 +22,7 @@
 		<tr>
 			<td colspan="2" align="center"><input class="btn btn-primary"
 				type="submit" value="저장"> <input class="btn btn-warning"
-				type="reset" value="취소">
+				type="reset" value="취소"></td>
 		</tr>
 	</table>
 </form>

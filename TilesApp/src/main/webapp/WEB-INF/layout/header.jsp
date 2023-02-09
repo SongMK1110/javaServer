@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- Page content wrapper-->
 <div id="page-content-wrapper">
 	<!-- Top navigation-->
@@ -18,7 +18,14 @@
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
 					<li class="nav-item active"><a class="nav-link" href="#!">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
+					<c:choose>
+						<c:when test="${!empty id }">
+							<li class="nav-item"><a class="nav-link" href="logout.do">로그아웃(${name })</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="nav-item"><a class="nav-link" href="loginForm.do">로그인</a></li>
+						</c:otherwise>
+					</c:choose>
 					<li class="nav-item dropdown"><a
 						class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
 						role="button" data-bs-toggle="dropdown" aria-haspopup="true"

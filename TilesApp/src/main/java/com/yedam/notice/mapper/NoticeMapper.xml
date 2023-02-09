@@ -40,4 +40,30 @@
 		hit_count = hit_count + 1
 		WHERE notice_id = #{nid}
 	</update>
+
+	<select id="replyList" resultType="ReplyVO">
+		SELECT * FROM tbl_reply WHERE
+		notice_id = #{nid}
+		ORDER BY reply_id
+	</select>
+
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM tbl_reply
+		WHERE reply_id = #{rid}
+	</delete>
+
+	<insert id="insertReply" parameterType="ReplyVO">
+		<selectKey keyProperty="replyId" resultType="int"
+			order="BEFORE">
+			select reply_seq.nextval from dual
+		</selectKey>
+
+		INSERT INTO tbl_reply
+		(reply_id, notice_id, reply_title, reply_subject,
+		reply_writer)
+		VALUES(#{replyId}, #{noticeId},
+		#{replyTitle},
+		#{replySubject},
+		#{replyWriter})
+	</insert>
 </mapper>
