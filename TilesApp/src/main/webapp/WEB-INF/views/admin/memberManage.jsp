@@ -27,8 +27,8 @@
 		<td><input type="file" id="mimage"></td>
 	</tr>
 	<tr>
-		<td colspan="2" align="center"><input type="button" id="addBtn"
-			value="등록"></td>
+		<td colspan="2" align="center">
+			<button id="addBtn" class="btn btn-success">등록</button>
 	</tr>
 </table>
 <br>
