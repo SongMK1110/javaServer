@@ -32,8 +32,12 @@
 						aria-expanded="false">Dropdown</a>
 						<div class="dropdown-menu dropdown-menu-end"
 							aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="#!">Action</a> <a
-								class="dropdown-item" href="#!">Another action</a>
+							<c:if test="${!empty Auth }">
+								<a class="dropdown-item" href="myPageForm.do">MyPage</a>
+							</c:if>
+							<c:if test="${Auth == 'admin' }">
+								<a class="dropdown-item" href="memberManageForm.do">Member Manage</a>
+							</c:if>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#!">Something else here</a>
 						</div></li>
